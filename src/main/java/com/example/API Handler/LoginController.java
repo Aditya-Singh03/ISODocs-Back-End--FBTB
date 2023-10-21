@@ -9,8 +9,17 @@ import com.example.Model.loginReturn;
 @RestController
 @CrossOrigin
 public class LoginController {
+    @Autowired
+    private final UserRepository userRespository;
+
     @PostMapping("/logIn")
     public ResponseEntity<loginReturn> logIn(@RequestBody loginRequest login) {
-        return ResponseEntity.ok(new loginReturn(true, "Log-in successful")); // will return call to service (return success object(key, value))
+        User user = userRepository.findByName(login.username);
+
+        if (user != null && user.getPassword().equals(login.password)) {
+            return ResponseEntity.ok(new loginReturn(true, "Log-in successful"));
+        } else {
+            return ResponseEntity.ok(new loginReturn(false, "Log-in failed"));
+        }
     }
 }
