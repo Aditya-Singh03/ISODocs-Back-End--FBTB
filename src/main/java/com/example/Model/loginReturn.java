@@ -8,4 +8,20 @@ public class loginReturn {
         this.success = success;
         this.message = message;
     }
+
+    public boolean getSuccess() {
+        return this.success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
+
+    public String getMessage() {
+        return this.message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 }
