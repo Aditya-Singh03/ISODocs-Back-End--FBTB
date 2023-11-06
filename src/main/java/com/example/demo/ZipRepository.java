@@ -8,5 +8,5 @@ import org.springframework.data.repository.CrudRepository;
 import com.example.Model.attachmentFile;
 
 public interface ZipRepository extends CrudRepository<attachmentFile, BigDecimal> {
-    public List<String> findFilePathsByAttachmentIdIn(List<BigDecimal> attachment_ids);
+    public List<attachmentFile> findFilePathsByAttachmentIdIn(List<BigDecimal> attachment_ids);
 }
