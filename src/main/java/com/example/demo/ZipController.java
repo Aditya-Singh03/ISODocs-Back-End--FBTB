@@ -24,12 +24,9 @@ public class ZipController {
     @GetMapping("/zipFiles")
     @ResponseBody
     public zipReturn zipFiles(@RequestParam List<BigDecimal> attachment_ids) throws IOException { // front end must send url parameters with form: http://localhost:8080/zipFiles?attachment_ids=1,2,3 or ?attachment_ids=1&attachment_ids=2
-
         // call service to encode and zip the files for download
         List<String> zippedFiles = zipService.zip(attachment_ids); 
-        return new zipReturn(zippedFiles);
-        // return zippedFiles;  
-        // return "IDs are: " + attachment_ids;     
+        return new zipReturn(zippedFiles);   
     }
     
 }

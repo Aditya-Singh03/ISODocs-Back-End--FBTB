@@ -17,11 +17,15 @@ public class attachmentFile {
     @Column(name = "file_path")
     private String filePath;
 
+    @Column(name = "file_name")
+    private String fileName;
+
     private attachmentFile() {}
 
-    public attachmentFile(BigDecimal attachmentId, String filePath) {
+    public attachmentFile(BigDecimal attachmentId, String filePath, String fileName) {
         this.attachmentId = attachmentId;
         this.filePath = filePath;
+        this.fileName = fileName;
     }
 
     public BigDecimal getAttachmentId() {
@@ -38,5 +42,13 @@ public class attachmentFile {
 
     public void setFilePath(String filePath) {
         this.filePath = filePath;
+    }
+
+    public String getFileName() {
+        return this.fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 }

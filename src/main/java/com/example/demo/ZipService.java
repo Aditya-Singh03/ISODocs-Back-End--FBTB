@@ -19,6 +19,8 @@ import com.example.Model.attachmentFile;
 
 @Component
 public class ZipService {
+    private String urlPrefix = "C:\\Users\\eting\\CS 320 File Store\\"; // for testing
+
     private List<String> attachment_ids;
 
     @Autowired
@@ -34,7 +36,7 @@ public class ZipService {
         List<attachmentFile> files = zipRepository.findFilePathsByAttachmentIdIn(attachment_ids);
         List<String> file_paths = new ArrayList<>();
         for (attachmentFile file : files) {
-            file_paths.add(file.getFilePath());
+            file_paths.add(urlPrefix + file.getFilePath() + "/" + file.getFileName());
         }
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         try (ZipOutputStream zipOut = new ZipOutputStream(outStream)) {
@@ -43,7 +45,6 @@ public class ZipService {
                 FileInputStream fis = new FileInputStream(fileToZip);
                 ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
                 zipOut.putNextEntry(zipEntry);
-
                 byte[] bytes = new byte[1024];
                 int length;
                 while ((length = fis.read(bytes)) >= 0) {
@@ -57,8 +58,5 @@ public class ZipService {
         String base64EncodedZip = Base64.getEncoder().encodeToString(zippedData);
         encodedZips.add(base64EncodedZip);
         return encodedZips;
-
-        // List<String> ret = zipRepository.findFilePathsByAttachmentIdIn(attachment_ids);
-        // return ret;
     }
 }
