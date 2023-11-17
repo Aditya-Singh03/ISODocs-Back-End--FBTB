@@ -21,12 +21,12 @@ import com.example.Model.attachmentFile;
 public class ZipService {
     private String urlPrefix = "C:\\Users\\eting\\CS 320 File Store\\"; // for testing
 
-    private List<String> attachment_ids;
+    private List<BigDecimal> attachment_ids;
 
     @Autowired
     private final ZipRepository zipRepository;
 
-    public ZipService(List<String> attachment_ids, ZipRepository zipRepository) {
+    public ZipService(List<BigDecimal> attachment_ids, ZipRepository zipRepository) {
         this.attachment_ids = attachment_ids;
         this.zipRepository = zipRepository;
     }
