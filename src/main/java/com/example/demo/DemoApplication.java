@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
+@ComponentScan("com.example.demo")
 @EntityScan("com.example.Model")
 // @ComponentScan("com.example.Service")
 public class DemoApplication {
