@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 
 
 @Entity
+@Table(name = "attach_proposal")
 public class AttachProposal {
     @EmbeddedId
     public AttachPropPrimaryKey id;

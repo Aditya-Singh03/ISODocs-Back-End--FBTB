@@ -30,11 +30,11 @@ public class AttachmentQuery{
         return this.documentRepository.findAll();
     }
 
-    @GetMapping("/documents/{name}")
-    public Attachment findByName(@PathVariable String docName) {
-        System.out.println("SEARCHING");
-        return this.documentRepository.findByName(docName);
-    }
+   // @GetMapping("/documents/{name}")
+   // public Attachment findByName(@PathVariable String docName) {
+     //   System.out.println("SEARCHING");
+       // return this.documentRepository.findByName(docName);
+   // }
 
     //Should we add an endpoint which gets the document/s based on id parameter?
 

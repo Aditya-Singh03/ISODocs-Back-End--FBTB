@@ -6,8 +6,10 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "attach_proposal")
 public class AttachPropPrimaryKey {
     @Id
     @Column(name = "proposal_id")

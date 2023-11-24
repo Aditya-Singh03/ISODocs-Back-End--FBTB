@@ -1,24 +1,47 @@
 package com.example.demo;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
-import org.springframework.stereotype.Repository;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
-import org.springframework.data.repository.query.Param;
+import javax.swing.text.html.HTMLDocument.Iterator;
 
-@Repository
-public class DocumentCustomService implements DocumentCustomRepository {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.transaction.Transactional;
+
+@RestController
+@RequestMapping("/customers")
+public class DocumentCustomRepository {
+    private final CustomerRepository customerRepository;
+    
+    @Autowired
+    public CustomerQuery(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
+
+    @GetMapping("/{customer_name}")
+    public ResponseEntity<List<Customer>> findByName(@PathVariable String customer_name) {
+        System.out.println("SEARCHING");
+        List<Customer> customers = this.customerRepository.findByName(customer_name);
+         if (customers.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(customers, HttpStatus.OK);
+        }
+    }
+    }
+
 
     @PersistenceContext
     private EntityManager entityManager;

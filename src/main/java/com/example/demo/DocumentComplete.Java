@@ -4,6 +4,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import com.example.demo.DocumentCustomRepository;
 
 @Entity
 @Table(name = "cust_info")
@@ -276,6 +277,7 @@ public class ResourceInfo {
 }
 
 @Entity
+@Table(name = "attach_proposal")
 public class AttachPropPrimaryKey {
     @Id
     @Column(name = "proposal_id")
@@ -321,7 +323,6 @@ public class AttachPropPrimaryKey {
         this.attachment_type = attachment_type;
     }
 }
-
 
 
 
