@@ -1,4 +1,4 @@
-package com.example.demo.DocumentEntities;
+package com.example.demo;
 import java.io.Serializable;
 import java.util.Objects;
 

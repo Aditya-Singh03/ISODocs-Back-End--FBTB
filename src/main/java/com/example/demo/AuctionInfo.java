@@ -13,32 +13,43 @@ public class AuctionInfo {
     public Long id;
 
     @Column (name = "commitment_period_id")
-    public String comPeriodId;
+    public Long comPeriodId;
 
     @Column (name = "auction_period_id")
-    public String aucPeriodId;
+    public Long aucPeriodId;
+
+    @Column (name = "auction_type")
+    public String type;
 
     public AuctionInfo(){
     }
 
-    public AuctionInfo(String comPeriodId, String aucPeriodId){
+    public AuctionInfo(Long comPeriodId, Long aucPeriodId){
         this.comPeriodId = comPeriodId;
         this.aucPeriodId = aucPeriodId;
     }
 
-    public String getComPeriodId(){
+    public Long getComPeriodId(){
         return this.comPeriodId;
     }
 
-    public String getAucPeriodId(){
+    public Long getAucPeriodId(){
         return this.aucPeriodId;
     }
 
-    public void setComPeriodId(String comPeriodId){
+    public String getAuctionType(){
+        return this.type;
+    }
+
+    public void setComPeriodId(Long comPeriodId){
         this.comPeriodId = comPeriodId;
     }
 
-    public void setAucPeriodId(String aucPeriodId){
+    public void setAucPeriodId(Long aucPeriodId){
         this.aucPeriodId = aucPeriodId;
+    }
+
+    public void setAuctionType(String type){
+        this.type = type;
     }
 }

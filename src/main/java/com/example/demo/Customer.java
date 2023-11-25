@@ -14,21 +14,21 @@ public class Customer {
     public Long id;
 
     @Column (name = "customer_name")
-    public String customer_name;
+    public String name;
 
     public Customer(){
     }
 
     public Customer(String customer_name){
-        this.customer_name = customer_name;
+        this.name = customer_name;
     }
 
     public String getCustomerName(){
-        return this.customer_name;
+        return this.name;
     }
 
     public void setCustomerName(String customer_name){
-        this.customer_name = customer_name;
+        this.name = customer_name;
     }
 }
 

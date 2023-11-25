@@ -13,27 +13,27 @@ public class ProposalInfo {
     public Long id;
 
     @Column (name = "project_id")
-    public String projectId;
+    public Long projectId;
 
     @Column (name = "project_type")
     public String projectType;
 
     @Column (name = "customer_id")
-    public String customerId;
+    public Long customerId;
 
     @Column (name = "resource_id")
-    public String resourceId;
+    public Long resourceId;
 
     @Column (name = "auction_id")
-    public String auctionId;
+    public Long auctionId;
 
     @Column (name = "period_id")
-    public String periodId;
+    public Long periodId;
 
     public ProposalInfo(){
     }
 
-    public ProposalInfo(String projectId, String projectType, String customerId, String resourceId, String auctionId, String periodId){
+    public ProposalInfo(Long projectId, String projectType, Long customerId, Long resourceId, Long auctionId, Long periodId){
         this.projectId = projectId;
         this.projectType = projectType;
         this.customerId = customerId;
@@ -42,7 +42,7 @@ public class ProposalInfo {
         this.periodId = periodId;
     }
 
-    public String getProjectId(){
+    public Long getProjectId(){
         return this.projectId;
     }
 
@@ -50,23 +50,23 @@ public class ProposalInfo {
         return this.projectType;
     }
 
-    public String getCustomerId(){
+    public Long getCustomerId(){
         return this.customerId;
     }
 
-    public String getResourceId(){
+    public Long getResourceId(){
         return this.resourceId;
     }
 
-    public String getAuctionId(){
+    public Long getAuctionId(){
         return this.auctionId;
     }
 
-    public String getPeriodId(){
+    public Long getPeriodId(){
         return this.periodId;
     }
 
-    public void setProjectId(String projectId){
+    public void setProjectId(Long projectId){
         this.projectId = projectId;
     }
 
@@ -74,19 +74,19 @@ public class ProposalInfo {
         this.projectType = projectType;
     }
 
-    public void setCustomerId(String customerId){
+    public void setCustomerId(Long customerId){
         this.customerId = customerId;
     }
 
-    public void setResourceId(String resourceId){
+    public void setResourceId(Long resourceId){
         this.resourceId = resourceId;
     }
 
-    public void setAuctionId(String auctionId){
+    public void setAuctionId(Long auctionId){
         this.auctionId = auctionId;
     }
 
-    public void setPeriodId(String periodId){
+    public void setPeriodId(Long periodId){
         this.periodId = periodId;
     }
     
