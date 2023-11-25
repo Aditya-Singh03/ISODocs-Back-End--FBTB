@@ -10,24 +10,25 @@ import jakarta.persistence.EntityManager;
 
 @Service
 public class AttachmentFileService {
-    public static List<AttachPropPrimaryKey> queryForDocuments() {
+    public static List<AttachPropPrimaryKey> queryForDocuments(Long attachment_id, String file_name, String project_name, String customer_name, Long commitment_period_id, String resource_name) {
         EntityManager em = EntityService.getEntityManagerFactory();
-        List<AttachPropPrimaryKey> var = em.createQuery("SELECT a.proposal_id, a.attachment_id, file.file_name, prop.project_id, prop.project_type, prop.customer_id," +
-        "prop.resource_id, prop.auction_id, prop.period_id, auc.auction_id, auc.commitment_period_id, auc.auction_period_id," +
-        "auc.auction_type, proj.project_name, res.resource_name, cust.customer_name" +
-        "FROM attach_proposal a" +
-        "JOIN attachment_file file ON a.attachment_id = file.attachment_id" +
-        "JOIN proposal_info prop on a.proposal_id = prop.proposal_id" +
-        "JOIN auc_info auc on prop.auction_id = auc.auction_id" +
-        "JOIN proj_info proj on prop.project_id = proj.project_id" +
-        "JOIN res_info res ON prop.resource_id = res.resource_id" +
-        "JOIN cust_info cust ON prop.customer_id = cust.customer_id" +
-        "WHERE LOWER(a.attachment_id) = LOWER(:attachment_id) AND (:file_name IS NULL OR LOWER(file.file_name) = LOWER(:file_name)) AND" +
-        "(:project_name IS NULL OR LOWER(proj.project_name) = LOWER(:project_name))" +
-        "AND (:customer_name IS NULL OR LOWER(cust.customer_name) = LOWER(:customer_name) AND" +
-        "(:commitment_period_id IS NULL OR LOWER(auc.commitment_period_id) = LOWER(:commitment_period_id))" +
-        "AND (:resource_name IS NULL OR LOWER(res.resource_name) = LOWER(:resource_name));").getResultList();
+        List<AttachPropPrimaryKey> var = em.createQuery("SELECT a.proposalId, a.attachmentId, file.name, prop.projectId, prop.projectType, prop.customerId, " +
+        "prop.resourceId, prop.auctionId, prop.periodId, auc.id, auc.commPeriodId, auc.aucPeriodId, " +
+        "auc.type, proj.name, res.name, cust.name " +
+        "FROM AttachPropPrimaryKey a " +
+        "JOIN Attachment file WITH a.attachmentId = file.id " +
+        "JOIN ProposalInfo prop WITH a.proposalId = prop.id " +
+        "JOIN AuctionInfo auc WITH prop.auctionId = auc.id " +
+        "JOIN ProjectInfo proj WITH prop.projectId = proj.id " +
+        "JOIN ResourceInfo res WITH prop.resourceId = res.id " +
+        "JOIN Customer cust WITH prop.customerId = cust.id " +
+        "WHERE LOWER(a.attachmentId) = LOWER(:attachment_id) AND (:file_name IS NULL OR LOWER(file.name) = LOWER(:file_name)) AND " +
+        "(:project_name IS NULL OR LOWER(proj.name) = LOWER(:project_name)) " +
+        "AND (:customer_name IS NULL OR LOWER(cust.name) = LOWER(:customer_name) AND " +
+        "(:commitment_period_id IS NULL OR LOWER(auc.comPeriodId) = LOWER(:commitment_period_id)) " +
+        "AND (:resource_name IS NULL OR LOWER(res.name) = LOWER(:resource_name));").setParameter("attachment_id", attachment_id).setParameter("file_name", file_name).setParameter("project_name", project_name).setParameter("customer_name", customer_name).setParameter("commitment_period_id", commitment_period_id).setParameter("resource_name", resource_name).getResultList();
         return var;
     }
+
     
 }

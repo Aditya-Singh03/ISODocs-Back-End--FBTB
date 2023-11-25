@@ -6,7 +6,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import com.example.demo.DocumentCustomRepository;
 
-
 @Entity
 @Table(name = "cust_info")
 public class Customer {

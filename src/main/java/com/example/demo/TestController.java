@@ -11,6 +11,6 @@ import com.example.demo.DocumentEntities.AttachPropPrimaryKey;
 public class TestController {
     @GetMapping("/TestCall")
     public List<AttachPropPrimaryKey> testCall() {
-        return AttachmentFileService.queryForDocuments();
+        return AttachmentFileService.queryForDocuments(1001L, "Project docs.zip", "Gravity Works", "Lightening Power", 1L, "Big Generator");
     }
 }
