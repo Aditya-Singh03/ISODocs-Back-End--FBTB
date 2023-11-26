@@ -37,7 +37,5 @@ public class AttachmentFileService {
         .setParameter("resource_name", resource_name)
         .getResultList();
         return var;
-    }
-
-    
+    }   
 }

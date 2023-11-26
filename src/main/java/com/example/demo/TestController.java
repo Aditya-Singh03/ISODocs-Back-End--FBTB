@@ -14,10 +14,10 @@ public class TestController {
     }
 
     @GetMapping("/filterDocs")
-    public List<Object> filterDocs(@RequestParam(value = "attachment_id", required = false) Long attachment_id,
+    public List<Object> filterDocs(@RequestParam(value = "attachment_id", required = true) Long attachment_id,
             @RequestParam(value = "file_name", required = false) String file_name,
             @RequestParam(value = "project_name", required = false) String project_name,
-            @RequestParam(value = "customer_name", required = false) String customer_name,
+            @RequestParam(value = "customer_name", required = true) String customer_name,
             @RequestParam(value = "commitment_period_id", required = false) Long commitment_period_id,
             @RequestParam(value = "resource_name", required = false) String resource_name) {
         
