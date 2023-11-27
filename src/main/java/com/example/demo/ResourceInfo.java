@@ -15,6 +15,9 @@ public class ResourceInfo {
     @Column (name = "resource_name")
     public String name;
 
+    @Column (name = "resource_type")
+    public String resType;
+
     public ResourceInfo(){
     }
 
@@ -28,6 +31,14 @@ public class ResourceInfo {
 
     public void setResourceInfoName(String name){
         this.name = name;
+    }
+    
+    public String getResType(){
+        return this.resType;
+    }
+
+    public void setResType(String resType){
+        this.resType = resType;
     }
     
 }

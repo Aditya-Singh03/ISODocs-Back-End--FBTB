@@ -30,6 +30,9 @@ public class ProposalInfo {
     @Column (name = "period_id")
     public Long periodId;
 
+    @Column (name = "proposal_label")
+    public String proposalLabel;
+
     public ProposalInfo(){
     }
 
@@ -88,6 +91,14 @@ public class ProposalInfo {
 
     public void setPeriodId(Long periodId){
         this.periodId = periodId;
+    }
+
+    public String getProposalLabel(){
+        return this.proposalLabel;
+    }
+
+    public void setProposalLabel(String proposalLabel){
+        this.proposalLabel = proposalLabel;
     }
     
 }

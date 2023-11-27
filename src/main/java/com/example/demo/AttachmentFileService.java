@@ -18,7 +18,7 @@ public class AttachmentFileService {
         EntityManager em = EntityService.getEntityManagerFactory();
         List<Object> var = em.createQuery("SELECT a.proposalId, a.attachmentId, file.name, prop.projectId, prop.projectType, prop.customerId, " +
         "prop.resourceId, prop.auctionId, prop.periodId, auc.id, auc.comPeriodId, auc.aucPeriodId, " +
-        "auc.type, proj.name, res.name, cust.name " +
+        "auc.type, proj.name, res.name, cust.name,  " +
         "FROM AttachPropPrimaryKey a " +
         "JOIN Attachment file ON a.attachmentId = file.id " +
         "JOIN ProposalInfo prop ON a.proposalId = prop.id " +
@@ -46,7 +46,7 @@ public class AttachmentFileService {
         EntityManager em = EntityService.getEntityManagerFactory();
         List<Object> var = em.createQuery("SELECT a.proposalId, a.attachmentId, file.name, prop.projectId, prop.projectType, prop.customerId, " +
         "prop.resourceId, prop.auctionId, prop.periodId, auc.id, auc.comPeriodId, auc.aucPeriodId, " +
-        "auc.type, proj.name, res.name, cust.name, file.path " +
+        "auc.type, proj.name, res.name, cust.name, file.path, a.attachment_type, prop.proposalLabel, res.resType, period_info.beginDate, period_info.endDate, period_info.periodType " +
         "FROM AttachPropPrimaryKey a " +
         "JOIN Attachment file ON a.attachmentId = file.id " +
         "JOIN ProposalInfo prop ON a.proposalId = prop.id " +
@@ -54,6 +54,7 @@ public class AttachmentFileService {
         "JOIN ProjectInfo proj ON prop.projectId = proj.id " +
         "JOIN ResourceInfo res ON prop.resourceId = res.id " +
         "JOIN Customer cust ON prop.customerId = cust.id " +
+        "JOIN period_info period_info ON auc.comPeriodId = period_info.id " +
         "WHERE (:attachment_id IS NULL OR a.attachmentId = :attachment_id) AND " +
         "(:file_name IS NULL OR file.name = :file_name) " +
         "AND (:project_name IS NULL OR proj.name LIKE :project_name) " +
@@ -91,6 +92,13 @@ public class AttachmentFileService {
                 jsonResult.put("resourceName","" + columns[14].toString());
                 jsonResult.put("custName","" + columns[15].toString());
                 jsonResult.put("filePath","" + columns[16].toString());
+                jsonResult.put("attachmentType","" + columns[17].toString());
+                jsonResult.put("proposalLabel","" + columns[18].toString());
+                jsonResult.put("resourceType","" + columns[19].toString());
+                jsonResult.put("beginDate","" + columns[20].toString());
+                jsonResult.put("endDate","" + columns[21].toString());
+                jsonResult.put("periodType","" + columns[22].toString());
+
                 
                 jsonResults.add(jsonResult);
             }
