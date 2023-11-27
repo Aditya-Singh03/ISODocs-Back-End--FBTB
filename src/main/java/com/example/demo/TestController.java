@@ -25,35 +25,8 @@ public class TestController {
             @RequestParam(value = "resource_name", required = false) String resource_name) {
         
 
-            List<Object> results = AttachmentFileService.queryForDocumentsOptional(attachment_id, file_name, project_name, customer_name, commitment_period_id, resource_name);
-            ArrayList<Map<String, Object>> jsonResults = new ArrayList<>();
-
-            for (Object result : results) {
-                Map<String, Object> jsonResult = new HashMap<>();
-                // Assuming result is an array of objects where each object corresponds to a column in the result set
-                Object[] columns = (Object[]) result;
-                jsonResult.put("proposalId","" + columns[0].toString());
-                jsonResult.put("attachmentId","" + columns[1].toString());
-                jsonResult.put("file_name","" + columns[2].toString());
-                jsonResult.put("projectId","" + columns[3].toString());
-                jsonResult.put("projectType","" + columns[4].toString());  
-                jsonResult.put("customerId","" + columns[5].toString());
-                jsonResult.put("resourceId","" + columns[6].toString());
-                jsonResult.put("auctionId","" + columns[7].toString());
-                jsonResult.put("periodId","" + columns[8].toString());
-                jsonResult.put("auctionId","" + columns[9].toString());
-                jsonResult.put("aucCommitId","" + columns[10].toString());
-                jsonResult.put("aucPeriodId","" + columns[11].toString());
-                jsonResult.put("aucType","" + columns[12].toString());
-                jsonResult.put("projectName","" + columns[13].toString());
-                jsonResult.put("resourceName","" + columns[14].toString());
-                jsonResult.put("custName","" + columns[15].toString());
-                jsonResult.put("filePath","" + columns[16].toString());
-                
-                jsonResults.add(jsonResult);
-            }
-
-            return jsonResults;
+            return AttachmentFileService.queryForDocumentsOptional(attachment_id, file_name, project_name, customer_name, commitment_period_id, resource_name);
+            
     }
 
 }
