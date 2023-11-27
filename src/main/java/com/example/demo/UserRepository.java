@@ -3,6 +3,8 @@ package com.example.demo;
 
 import org.springframework.data.repository.CrudRepository;
 
+import com.example.Model.User;
+
 public interface UserRepository extends CrudRepository<User, String> {
     public User findByName(String name);
     public User findByNameAndPassword(String name, String password);
