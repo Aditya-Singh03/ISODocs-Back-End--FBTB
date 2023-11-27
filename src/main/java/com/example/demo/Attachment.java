@@ -22,6 +22,10 @@ public class Attachment {
     @Column (name = "file_name")
     public String name;
 
+    @Column (name = "file_path")
+    public String path;
+
+
     public Attachment(){
     }
 
@@ -35,5 +39,13 @@ public class Attachment {
 
     public void setDocName(String docName){
         this.name = docName;
+    }
+
+    public String getPath(){
+        return this.path;
+    }
+
+    public void setPath(String path){
+        this.path = path;
     }
 }

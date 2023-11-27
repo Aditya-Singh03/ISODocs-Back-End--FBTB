@@ -41,9 +41,15 @@ public class TestController {
                 jsonResult.put("resourceId","" + columns[6].toString());
                 jsonResult.put("auctionId","" + columns[7].toString());
                 jsonResult.put("periodId","" + columns[8].toString());
-                jsonResult.put("id","" + columns[9].toString());
-                jsonResult.put("comPeriodId","" + columns[10].toString());
+                jsonResult.put("auctionId","" + columns[9].toString());
+                jsonResult.put("aucCommitId","" + columns[10].toString());
                 jsonResult.put("aucPeriodId","" + columns[11].toString());
+                jsonResult.put("aucType","" + columns[12].toString());
+                jsonResult.put("projectName","" + columns[13].toString());
+                jsonResult.put("resourceName","" + columns[14].toString());
+                jsonResult.put("custName","" + columns[15].toString());
+                jsonResult.put("filePath","" + columns[16].toString());
+                
                 jsonResults.add(jsonResult);
             }
 
