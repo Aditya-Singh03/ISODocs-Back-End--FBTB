@@ -1,36 +1,26 @@
-// package com.example.demo;
+package com.example.demo;
 
-// import java.math.BigDecimal;
-// import java.util.Base64;
+import java.util.Base64;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-// import com.example.Model.attachmentFile;
-// import com.example.Model.metaReturn;
+import com.example.Model.attachmentFile;
+import com.example.Model.metaReturn;
 
-// @Component
-// public class DocumentDetailService {
-//     private BigDecimal attachment_id;
-    
-//     // temp entity
-//     @Autowired
-//     private final tempDocDetailRepository temp;
-    
-//     public DocumentDetailService(BigDecimal attachment_id, tempDocDetailRepository temp) {
-//         this.attachment_id = attachment_id;
-//         this.temp = temp;
-//     }
-    
-//     public String encode(BigDecimal attachment_id) { // encode file's data in base64
-//         attachmentFile file = tempDocDetailRepository.findFilePathsByAttachmentIdIn(attachment_id);
-//         byte[] fileData = file.getFilePath().getBytes(); // turn file path String into byte[]
-//         String base64EncodedFile = Base64.getEncoder().encodeToString(fileData); // encode in base64
-//         return base64EncodedFile;
-//     }
+@Component
+public class DocumentDetailService {
+    private String urlPrefix = "C:\\Users\\eting\\CS 320 File Store\\"; // for testing
 
-//     public metaReturn meta(BigDecimal attachment_id) { // return file's metaData information
-//         metaReturn metaData = new metaReturn(null, null, null, null, null, null, null, null, null, null, null, null, 0);
-//         return metaData;
-//     }
-// }
+    public String encode(Long attachment_id, String filePath, String fileName) { // encode file's data in base64
+        String newFilePath = urlPrefix + filePath + "/" + fileName;
+        byte[] fileData = newFilePath.getBytes(); // turn file path String into byte[]
+        String base64EncodedFile = Base64.getEncoder().encodeToString(fileData); // encode in base64
+        return base64EncodedFile;
+    }
+
+    public metaReturn meta(String documentName, String projectName, String projectType, String periodStart, String periodEnd, String periodType, String customer, String resource, String resourceType, String auctionType, String proposalLabel, String attachmentType, float fileSize) { // return file's metaData information
+        metaReturn metaData = new metaReturn(documentName, projectName, projectType, periodStart, periodEnd, periodType, customer, resource, resourceType, auctionType, proposalLabel, attachmentType, 0);
+        return metaData;
+    }
+}
