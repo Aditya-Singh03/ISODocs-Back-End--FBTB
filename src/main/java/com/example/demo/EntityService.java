@@ -7,10 +7,8 @@ import jakarta.persistence.Persistence;
 public class EntityService {
     private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("DATA");
 
-    private static EntityManager em = emf.createEntityManager();
-
     public static EntityManager getEntityManagerFactory() {
-        return em;
+        return emf.createEntityManager();
     }
     
 }
