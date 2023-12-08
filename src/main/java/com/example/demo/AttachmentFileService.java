@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// import java.text.SimpleDateFormat;
 import org.antlr.v4.runtime.atn.SemanticContext.OR;
 import org.springframework.stereotype.Service;
 
@@ -42,11 +43,20 @@ public class AttachmentFileService {
         return var;
     }
     
-    public static ArrayList<Map<String, Object>> queryForDocumentsOptional(Long attachment_id, String file_name, String project_name, String customer_name, Long commitment_period_id, String resource_name) {
+    public static ArrayList<Map<String, Object>> queryForDocumentsOptional(Long attachment_id, String file_name, String project_name, String customer_name, Long commitment_period_id, String resource_name,
+                                                                            String auc_begin_date, String auc_end_date, String proposal_label, String auction_type) {
         EntityManager em = EntityService.getEntityManagerFactory();
+        // SimpleDateFormat formatter = new SimpleDateFormat("mm-dd-yyyy");
+        // java.sql.Date aucBeginDate = null;
+        // java.sql.Date aucEndDate = null;
+        // try {
+        //     aucBeginDate = java.sql.Date.valueOf(auc_begin_date);
+        //     aucEndDate = java.sql.Date.valueOf(auc_end_date);
+        // } catch(Exception e) {
+        // }
         List<Object> var = em.createQuery("SELECT a.proposalId, a.attachmentId, file.name, prop.projectId, prop.projectType, prop.customerId, " +
         "prop.resourceId, prop.auctionId, prop.periodId, auc.id, auc.comPeriodId, auc.aucPeriodId, " +
-        "auc.type, proj.name, res.name, cust.name, file.path, a.attachment_type, prop.proposalLabel, res.resType, period_info.beginDate, period_info.endDate, period_info.periodType " +
+        "auc.type, proj.name, res.name, cust.name, file.path, a.attachment_type, prop.proposalLabel, res.resType, period_info.beginDate, period_info.endDate, period_info.periodType, auc.aucBeginDate, auc.aucEndDate " +
         "FROM AttachPropPrimaryKey a " +
         "JOIN Attachment file ON a.attachmentId = file.id " +
         "JOIN ProposalInfo prop ON a.proposalId = prop.id " +
@@ -60,13 +70,21 @@ public class AttachmentFileService {
         "AND (:project_name IS NULL OR proj.name LIKE :project_name) " +
         "AND (:customer_name IS NULL OR cust.name = :customer_name) " +
         "AND (:commitment_period_id IS NULL OR auc.comPeriodId = :commitment_period_id) " +
-        "AND (:resource_name IS NULL OR res.name = :resource_name)")
+        "AND (:resource_name IS NULL OR res.name = :resource_name) " +
+        // "AND (:auc_begin_date IS NULL OR auc.aucBeginDate BETWEEN " + auc_begin_date + " AND " + auc_end_date + ") " +
+        // "AND (:auc_end_date IS NULL OR auc.aucBeginDate BETWEEN " + auc_begin_date + " AND " + auc_end_date + ") " +
+        "AND (:proposal_label IS NULL OR prop.proposalLabel = :proposal_label) " +
+        "AND (:auction_type IS NULL OR auc.type = :auction_type)")
         .setParameter("attachment_id", attachment_id)
         .setParameter("file_name", file_name)
         .setParameter("project_name", project_name)
         .setParameter("customer_name", customer_name)
         .setParameter("commitment_period_id", commitment_period_id)
         .setParameter("resource_name", resource_name)
+        // .setParameter("auc_begin_date", auc_begin_date)
+        // .setParameter("auc_end_date", auc_end_date)
+        .setParameter("proposal_label", proposal_label)
+        .setParameter("auction_type", auction_type)
         .getResultList();
         
         ArrayList<Map<String, Object>> jsonResults = new ArrayList<>();
@@ -98,6 +116,8 @@ public class AttachmentFileService {
                 jsonResult.put("beginDate","" + columns[20].toString());
                 jsonResult.put("endDate","" + columns[21].toString());
                 jsonResult.put("periodType","" + columns[22].toString());
+                jsonResult.put("aucBeginDate","" + columns[23].toString());
+                jsonResult.put("aucEndDate","" + columns[24].toString());
 
                 
                 jsonResults.add(jsonResult);

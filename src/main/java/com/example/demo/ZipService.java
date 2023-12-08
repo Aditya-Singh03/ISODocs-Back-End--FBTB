@@ -19,7 +19,7 @@ import com.example.Model.attachmentFile;
 
 @Component
 public class ZipService {
-    private String urlPrefix = "C:\\Users\\eting\\CS 320 File Store\\"; // for testing
+    private String urlPrefix = "data/"; // for testing
 
     private List<BigDecimal> attachment_ids;
 
