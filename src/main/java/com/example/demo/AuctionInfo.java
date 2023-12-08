@@ -21,6 +21,12 @@ public class AuctionInfo {
     @Column (name = "auction_type")
     public String type;
 
+    @Column (name = "auction_begin_date")
+    public String beginDate;
+
+    @Column (name = "auction_end_date")
+    public String endDate;   
+
     public AuctionInfo(){
     }
 
@@ -41,6 +47,14 @@ public class AuctionInfo {
         return this.type;
     }
 
+    public String getAucBeginDate() {
+        return this.beginDate;
+    }
+
+    public String getAucEndDate() {
+        return this.endDate;
+    }
+
     public void setComPeriodId(Long comPeriodId){
         this.comPeriodId = comPeriodId;
     }
@@ -51,5 +65,13 @@ public class AuctionInfo {
 
     public void setAuctionType(String type){
         this.type = type;
+    }
+
+    public void setAucBeginDate(String beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public void setAucEndDate(String endDate) {
+        this.endDate = endDate;
     }
 }
