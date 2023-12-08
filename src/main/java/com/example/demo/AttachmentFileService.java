@@ -47,13 +47,13 @@ public class AttachmentFileService {
                                                                             String auc_begin_date, String auc_end_date, String proposal_label, String auction_type) {
         EntityManager em = EntityService.getEntityManagerFactory();
         // SimpleDateFormat formatter = new SimpleDateFormat("mm-dd-yyyy");
-        // java.sql.Date aucBeginDate = null;
-        // java.sql.Date aucEndDate = null;
-        // try {
-        //     aucBeginDate = java.sql.Date.valueOf(auc_begin_date);
-        //     aucEndDate = java.sql.Date.valueOf(auc_end_date);
-        // } catch(Exception e) {
-        // }
+        java.sql.Date aucBeginDate = null;
+        java.sql.Date aucEndDate = null;
+        try {
+            aucBeginDate = java.sql.Date.valueOf(auc_begin_date);
+            aucEndDate = java.sql.Date.valueOf(auc_end_date);
+        } catch(Exception e) {
+        }
         List<Object> var = em.createQuery("SELECT a.proposalId, a.attachmentId, file.name, prop.projectId, prop.projectType, prop.customerId, " +
         "prop.resourceId, prop.auctionId, prop.periodId, auc.id, auc.comPeriodId, auc.aucPeriodId, " +
         "auc.type, proj.name, res.name, cust.name, file.path, a.attachment_type, prop.proposalLabel, res.resType, period_info.beginDate, period_info.endDate, period_info.periodType, auc.aucBeginDate, auc.aucEndDate " +
@@ -71,8 +71,8 @@ public class AttachmentFileService {
         "AND (:customer_name IS NULL OR cust.name = :customer_name) " +
         "AND (:commitment_period_id IS NULL OR auc.comPeriodId = :commitment_period_id) " +
         "AND (:resource_name IS NULL OR res.name = :resource_name) " +
-        "AND (:auc_begin_date IS NULL OR auc.aucBeginDate BETWEEN " + auc_begin_date + " AND " + auc_end_date + ") " +
-        "AND (:auc_end_date IS NULL OR auc.aucBeginDate BETWEEN " + auc_begin_date + " AND " + auc_end_date + ") " +
+        "AND (:auc_begin_date IS NULL OR auc.aucBeginDate BETWEEN :auc_begin_date AND :auc_end_date) " +
+        "AND (:auc_end_date IS NULL OR auc.aucBeginDate BETWEEN :auc_begin_date AND :auc_end_date) " +
         "AND (:proposal_label IS NULL OR prop.proposalLabel = :proposal_label) " +
         "AND (:auction_type IS NULL OR auc.type = :auction_type)")
         .setParameter("attachment_id", attachment_id)
@@ -81,8 +81,8 @@ public class AttachmentFileService {
         .setParameter("customer_name", customer_name)
         .setParameter("commitment_period_id", commitment_period_id)
         .setParameter("resource_name", resource_name)
-        .setParameter("auc_begin_date", auc_begin_date)
-        .setParameter("auc_end_date", auc_end_date)
+        .setParameter("auc_begin_date", aucBeginDate)
+        .setParameter("auc_end_date", aucEndDate)
         .setParameter("proposal_label", proposal_label)
         .setParameter("auction_type", auction_type)
         .getResultList();
