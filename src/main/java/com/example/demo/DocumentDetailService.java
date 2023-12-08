@@ -23,8 +23,8 @@ public class DocumentDetailService {
         }
     }
 
-    public metaReturn meta(String documentName, String projectName, String projectType, String periodStart, String periodEnd, String periodType, String customer, String resource, String resourceType, String auctionType, String proposalLabel, String attachmentType, String aucBeginDate, String aucEndDate, float fileSize) { // return file's metaData information
-        metaReturn metaData = new metaReturn(documentName, projectName, projectType, periodStart, periodEnd, periodType, customer, resource, resourceType, auctionType, proposalLabel, attachmentType, aucBeginDate, aucEndDate, 0);
+    public metaReturn meta(String documentName, String projectName, String projectType, String periodStart, String periodEnd, String periodType, String customer, String resource, String resourceType, String auctionType, String proposalLabel, String attachmentType, String aucBeginDate, String aucEndDate, long fileSize) { // return file's metaData information
+        metaReturn metaData = new metaReturn(documentName, projectName, projectType, periodStart, periodEnd, periodType, customer, resource, resourceType, auctionType, proposalLabel, attachmentType, aucBeginDate, aucEndDate, fileSize);
         return metaData;
     }
 }

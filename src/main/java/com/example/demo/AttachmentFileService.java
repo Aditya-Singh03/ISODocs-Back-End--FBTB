@@ -46,7 +46,7 @@ public class AttachmentFileService {
         EntityManager em = EntityService.getEntityManagerFactory();
         List<Object> var = em.createQuery("SELECT a.proposalId, a.attachmentId, file.name, prop.projectId, prop.projectType, prop.customerId, " +
         "prop.resourceId, prop.auctionId, prop.periodId, auc.id, auc.comPeriodId, auc.aucPeriodId, " +
-        "auc.type, proj.name, res.name, cust.name, file.path, a.attachment_type, prop.proposalLabel, res.resType, period_info.beginDate, period_info.endDate, period_info.periodType, auc.beginDate, auc.endDate" +
+        "auc.type, proj.name, res.name, cust.name, file.path, a.attachment_type, prop.proposalLabel, res.resType, period_info.beginDate, period_info.endDate, period_info.periodType, auc.beginDate, auc.endDate " +
         "FROM AttachPropPrimaryKey a " +
         "JOIN Attachment file ON a.attachmentId = file.id " +
         "JOIN ProposalInfo prop ON a.proposalId = prop.id " +
