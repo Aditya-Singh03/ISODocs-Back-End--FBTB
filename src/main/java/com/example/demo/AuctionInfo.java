@@ -1,9 +1,13 @@
 package com.example.demo;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "auc_info")
@@ -22,10 +26,12 @@ public class AuctionInfo {
     public String type;
 
     @Column(name = "auction_begin_date")
-    public String aucBeginDate;
+    @Temporal(TemporalType.DATE)
+    public Date aucBeginDate;
 
     @Column(name = "auction_end_date")
-    public String aucEndDate;
+    @Temporal(TemporalType.DATE)
+    public Date aucEndDate;
 
     public AuctionInfo(){
     }
@@ -47,11 +53,11 @@ public class AuctionInfo {
         return this.type;
     }
 
-    public String getAucBeginDate() {
+    public Date getAucBeginDate() {
         return this.aucBeginDate;
     }
 
-    public String getAucEndDate() {
+    public Date getAucEndDate() {
         return this.aucEndDate;
     }
 
@@ -67,11 +73,11 @@ public class AuctionInfo {
         this.type = type;
     }
 
-    public void setAucBeginDate(String beginDate) {
+    public void setAucBeginDate(Date beginDate) {
         this.aucBeginDate = beginDate;
     }
 
-    public void setAucEndDate(String endDate) {
+    public void setAucEndDate(Date endDate) {
         this.aucEndDate = endDate;
     }
 }
