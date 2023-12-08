@@ -71,8 +71,8 @@ public class AttachmentFileService {
         "AND (:customer_name IS NULL OR cust.name = :customer_name) " +
         "AND (:commitment_period_id IS NULL OR auc.comPeriodId = :commitment_period_id) " +
         "AND (:resource_name IS NULL OR res.name = :resource_name) " +
-        // "AND (:auc_begin_date IS NULL OR auc.aucBeginDate BETWEEN " + auc_begin_date + " AND " + auc_end_date + ") " +
-        // "AND (:auc_end_date IS NULL OR auc.aucBeginDate BETWEEN " + auc_begin_date + " AND " + auc_end_date + ") " +
+        "AND (:auc_begin_date IS NULL OR auc.aucBeginDate BETWEEN " + auc_begin_date + " AND " + auc_end_date + ") " +
+        "AND (:auc_end_date IS NULL OR auc.aucBeginDate BETWEEN " + auc_begin_date + " AND " + auc_end_date + ") " +
         "AND (:proposal_label IS NULL OR prop.proposalLabel = :proposal_label) " +
         "AND (:auction_type IS NULL OR auc.type = :auction_type)")
         .setParameter("attachment_id", attachment_id)
@@ -81,8 +81,8 @@ public class AttachmentFileService {
         .setParameter("customer_name", customer_name)
         .setParameter("commitment_period_id", commitment_period_id)
         .setParameter("resource_name", resource_name)
-        // .setParameter("auc_begin_date", auc_begin_date)
-        // .setParameter("auc_end_date", auc_end_date)
+        .setParameter("auc_begin_date", auc_begin_date)
+        .setParameter("auc_end_date", auc_end_date)
         .setParameter("proposal_label", proposal_label)
         .setParameter("auction_type", auction_type)
         .getResultList();
