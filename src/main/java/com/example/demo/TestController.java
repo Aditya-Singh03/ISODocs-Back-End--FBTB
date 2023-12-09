@@ -34,9 +34,6 @@ public class TestController {
         int pageSize = 3;
         int startIndex = (page - 1) * pageSize;
         int endIndex = startIndex + pageSize;
-
-        auc_begin_date = "05-06-2009";
-        auc_end_date = "01-01-2015";
         
         ArrayList<Map<String, Object>> documents = AttachmentFileService.queryForDocumentsOptional(attachment_id, file_name, project_name, customer_name, commitment_period_id, resource_name, auc_begin_date, auc_end_date, proposal_label, auction_type);
         

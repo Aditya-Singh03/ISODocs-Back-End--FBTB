@@ -58,7 +58,6 @@ public class AttachmentFileService {
             aucBeginDate = new java.sql.Date(begin_date.getTime());
             aucEndDate = new java.sql.Date(end_date.getTime());
         } catch(Exception e) {
-            throw new IllegalStateException("cannot parse date");
         }
         List<Object> var = em.createQuery("SELECT a.proposalId, a.attachmentId, file.name, prop.projectId, prop.projectType, prop.customerId, " +
         "prop.resourceId, prop.auctionId, prop.periodId, auc.id, auc.comPeriodId, auc.aucPeriodId, " +
@@ -77,8 +76,8 @@ public class AttachmentFileService {
         "AND (:customer_name IS NULL OR cust.name = :customer_name) " +
         "AND (:commitment_period_id IS NULL OR auc.comPeriodId = :commitment_period_id) " +
         "AND (:resource_name IS NULL OR res.name = :resource_name) " +
-        "AND (CAST(:auc_begin_date AS DATE) IS NULL OR auc.aucBeginDate BETWEEN :auc_begin_date AND :auc_end_date) " +
-        "AND (CAST(:auc_end_date AS DATE) IS NULL OR auc.aucEndDate BETWEEN :auc_begin_date AND :auc_end_date) " +
+        "AND (CAST(:auc_begin_date AS DATE) IS NULL OR (auc.aucBeginDate >= :auc_begin_date AND auc.aucEndDate >= :auc_begin_date)) " +
+        "AND (CAST(:auc_end_date AS DATE) IS NULL OR (auc.aucBeginDate <= :auc_end_date AND auc.aucEndDate <= :auc_end_date)) " +
         "AND (:proposal_label IS NULL OR prop.proposalLabel = :proposal_label) " +
         "AND (:auction_type IS NULL OR auc.type = :auction_type)")
         .setParameter("attachment_id", attachment_id)
