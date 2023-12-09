@@ -47,6 +47,9 @@ public class AttachmentFileService {
     public static ArrayList<Map<String, Object>> queryForDocumentsOptional(Long attachment_id, String file_name, String project_name, String customer_name, Long commitment_period_id, String resource_name,
                                                                             String auc_begin_date, String auc_end_date, String proposal_label, String auction_type) {
         EntityManager em = EntityService.getEntityManagerFactory();
+        file_name = file_name == null ? null : "%"+file_name+"%";
+        customer_name = customer_name == null ? null : "%"+customer_name+"%";
+        project_name = project_name == null ? null : "%"+project_name+"%";
         SimpleDateFormat formatter = new SimpleDateFormat("mm-dd-yyyy");
         java.sql.Date aucBeginDate = null;
         java.sql.Date aucEndDate = null;
@@ -80,9 +83,9 @@ public class AttachmentFileService {
         "JOIN Customer cust ON prop.customerId = cust.id " +
         "JOIN period_info period_info ON auc.comPeriodId = period_info.id " +
         "WHERE (:attachment_id IS NULL OR a.attachmentId = :attachment_id) AND " +
-        "(:file_name IS NULL OR file.name = :file_name) " +
+        "(:file_name IS NULL OR file.name LIKE :file_name) " +
         "AND (:project_name IS NULL OR proj.name LIKE :project_name) " +
-        "AND (:customer_name IS NULL OR cust.name = :customer_name) " +
+        "AND (:customer_name IS NULL OR cust.name LIKE :customer_name) " +
         "AND (:commitment_period_id IS NULL OR auc.comPeriodId = :commitment_period_id) " +
         "AND (:resource_name IS NULL OR res.name = :resource_name) " +
         "AND (CAST(:auc_begin_date AS DATE) IS NULL OR (auc.aucBeginDate >= :auc_begin_date AND auc.aucEndDate >= :auc_begin_date)) " +
