@@ -30,7 +30,7 @@ public class TestController {
             @RequestParam(value = "proposal_label", required = false) String proposal_label,
             @RequestParam(value = "auction_type", required = false) String auction_type,
             @RequestParam(value = "page", defaultValue = "1") int page, 
-            @RequestParam(value = "limit", defaultValue = "3") int pageSize) {
+            @RequestParam(value = "limit", defaultValue = "15") int pageSize) {
     
         int startIndex = (page - 1) * pageSize;
         int endIndex = startIndex + pageSize;
