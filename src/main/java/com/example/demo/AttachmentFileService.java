@@ -52,12 +52,21 @@ public class AttachmentFileService {
         java.sql.Date aucEndDate = null;
         java.util.Date begin_date = null;
         java.util.Date end_date = null;
-        try {
-            begin_date = formatter.parse(auc_begin_date);
-            end_date = formatter.parse(auc_end_date);
-            aucBeginDate = new java.sql.Date(begin_date.getTime());
-            aucEndDate = new java.sql.Date(end_date.getTime());
-        } catch(Exception e) {
+        if (auc_begin_date != null) {
+            try {
+                begin_date = formatter.parse(auc_begin_date);
+                aucBeginDate = new java.sql.Date(begin_date.getTime());
+            } catch(Exception e) {
+                throw new IllegalStateException("Can not parse begin date");
+            }
+        }
+        if (auc_end_date != null) {
+            try {
+                end_date = formatter.parse(auc_end_date);
+                aucEndDate = new java.sql.Date(end_date.getTime());
+            } catch(Exception e) {
+                throw new IllegalStateException("Can not parse end date");
+            }
         }
         List<Object> var = em.createQuery("SELECT a.proposalId, a.attachmentId, file.name, prop.projectId, prop.projectType, prop.customerId, " +
         "prop.resourceId, prop.auctionId, prop.periodId, auc.id, auc.comPeriodId, auc.aucPeriodId, " +
