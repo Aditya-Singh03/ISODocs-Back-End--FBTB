@@ -13,9 +13,11 @@ public class metaReturn {
     private String auctionType;
     private String proposalLabel;
     private String attachmentType;
+    private String auctionBeginDate;
+    private String auctionEndDate;
     private float fileSize;
 
-    public metaReturn(String documentName, String projectName, String projectType, String periodStart, String periodEnd, String periodType, String customer, String resource, String resourceType, String auctionType, String proposalLabel, String attachmentType, float fileSize){
+    public metaReturn(String documentName, String projectName, String projectType, String periodStart, String periodEnd, String periodType, String customer, String resource, String resourceType, String auctionType, String proposalLabel, String attachmentType, String auctionBeginDate, String auctionEndDate, float fileSize){
         this.documentName=documentName;
         this.projectName=projectName;
         this.projectType=projectType;
@@ -28,6 +30,8 @@ public class metaReturn {
         this.auctionType=auctionType;
         this.proposalLabel=proposalLabel;
         this.attachmentType=attachmentType;
+        this.auctionBeginDate=auctionBeginDate;
+        this.auctionEndDate=auctionEndDate;
         this.fileSize=fileSize;
     }
 
@@ -125,6 +129,22 @@ public class metaReturn {
 
     public String getAttachmentType(){
         return attachmentType;
+    }
+
+    public void setAuctionBeginDate(String aucBeginDate) {
+        auctionBeginDate=aucBeginDate;
+    }
+
+    public String getAuctionBeginDate() {
+        return auctionBeginDate;
+    }
+
+    public void setAuctionEndDate(String aucEndDate) {
+        auctionEndDate=aucEndDate;
+    }
+
+    public String getAuctionEndDate() {
+        return auctionEndDate;
     }
 
     public void setFileSize(float size){
