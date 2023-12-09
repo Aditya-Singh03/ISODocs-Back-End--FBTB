@@ -26,6 +26,14 @@ public class DocumentDetailService {
         } catch (IOException e) {
             throw new IllegalStateException("could not read file " + file, e);
         }
+<<<<<<< HEAD
+=======
+    }
+
+    public String encode(Long attachment_id, String filePath, String fileName) {
+        String newFilePath = prefix + filePath + "/" + fileName;
+        return encodeFileToBase64(newFilePath);
+>>>>>>> 1b1e75d13c78d4c30d2659a642892219b319ed2e
     }
 
     public String encode(Long attachment_id, String filePath, String fileName) {
