@@ -73,11 +73,7 @@ public class AttachmentFileService {
         }
         List<Object> var = em.createQuery("SELECT a.proposalId, a.attachmentId, file.name, prop.projectId, prop.projectType, prop.customerId, " +
         "prop.resourceId, prop.auctionId, prop.periodId, auc.id, auc.comPeriodId, auc.aucPeriodId, " +
-<<<<<<< HEAD
-        "auc.type, proj.name, res.name, cust.name, file.path, a.attachment_type, prop.proposalLabel, res.resType, period_info.beginDate, period_info.endDate, period_info.periodType, auc.beginDate, auc.endDate " +
-=======
         "auc.type, proj.name, res.name, cust.name, file.path, a.attachment_type, prop.proposalLabel, res.resType, period_info.beginDate, period_info.endDate, period_info.periodType, auc.aucBeginDate, auc.aucEndDate " +
->>>>>>> 89f12f5c5e19421e7f607ce0eee2d9114b203bcf
         "FROM AttachPropPrimaryKey a " +
         "JOIN Attachment file ON a.attachmentId = file.id " +
         "JOIN ProposalInfo prop ON a.proposalId = prop.id " +
@@ -139,12 +135,8 @@ public class AttachmentFileService {
                 jsonResult.put("periodType","" + columns[22].toString());
                 jsonResult.put("aucBeginDate","" + columns[23].toString());
                 jsonResult.put("aucEndDate","" + columns[24].toString());
-<<<<<<< HEAD
-            
-=======
 
                 
->>>>>>> 89f12f5c5e19421e7f607ce0eee2d9114b203bcf
                 jsonResults.add(jsonResult);
             }
 

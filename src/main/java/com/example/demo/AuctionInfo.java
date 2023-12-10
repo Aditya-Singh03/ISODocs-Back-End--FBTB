@@ -25,13 +25,6 @@ public class AuctionInfo {
     @Column (name = "auction_type")
     public String type;
 
-<<<<<<< HEAD
-    @Column (name = "auction_begin_date")
-    public String beginDate;
-
-    @Column (name = "auction_end_date")
-    public String endDate;   
-=======
     @Column(name = "auction_begin_date")
     @Temporal(TemporalType.DATE)
     public Date aucBeginDate;
@@ -39,7 +32,6 @@ public class AuctionInfo {
     @Column(name = "auction_end_date")
     @Temporal(TemporalType.DATE)
     public Date aucEndDate;
->>>>>>> 89f12f5c5e19421e7f607ce0eee2d9114b203bcf
 
     public AuctionInfo(){
     }
@@ -61,21 +53,12 @@ public class AuctionInfo {
         return this.type;
     }
 
-<<<<<<< HEAD
-    public String getAucBeginDate() {
-        return this.beginDate;
-    }
-
-    public String getAucEndDate() {
-        return this.endDate;
-=======
     public Date getAucBeginDate() {
         return this.aucBeginDate;
     }
 
     public Date getAucEndDate() {
         return this.aucEndDate;
->>>>>>> 89f12f5c5e19421e7f607ce0eee2d9114b203bcf
     }
 
     public void setComPeriodId(Long comPeriodId){
@@ -90,20 +73,11 @@ public class AuctionInfo {
         this.type = type;
     }
 
-<<<<<<< HEAD
-    public void setAucBeginDate(String beginDate) {
-        this.beginDate = beginDate;
-    }
-
-    public void setAucEndDate(String endDate) {
-        this.endDate = endDate;
-=======
     public void setAucBeginDate(Date beginDate) {
         this.aucBeginDate = beginDate;
     }
 
     public void setAucEndDate(Date endDate) {
         this.aucEndDate = endDate;
->>>>>>> 89f12f5c5e19421e7f607ce0eee2d9114b203bcf
     }
 }
