@@ -15,9 +15,15 @@ public class metaReturn {
     private String attachmentType;
     private String auctionBeginDate;
     private String auctionEndDate;
+<<<<<<< HEAD
     private long fileSize;
 
     public metaReturn(String documentName, String projectName, String projectType, String periodStart, String periodEnd, String periodType, String customer, String resource, String resourceType, String auctionType, String proposalLabel, String attachmentType, String auctionBeginDate, String auctionEndDate, long fileSize){
+=======
+    private float fileSize;
+
+    public metaReturn(String documentName, String projectName, String projectType, String periodStart, String periodEnd, String periodType, String customer, String resource, String resourceType, String auctionType, String proposalLabel, String attachmentType, String auctionBeginDate, String auctionEndDate, float fileSize){
+>>>>>>> 89f12f5c5e19421e7f607ce0eee2d9114b203bcf
         this.documentName=documentName;
         this.projectName=projectName;
         this.projectType=projectType;
@@ -147,7 +153,11 @@ public class metaReturn {
         return auctionEndDate;
     }
 
+<<<<<<< HEAD
     public void setFileSize(long size){
+=======
+    public void setFileSize(float size){
+>>>>>>> 89f12f5c5e19421e7f607ce0eee2d9114b203bcf
         fileSize=size;
     }
 
