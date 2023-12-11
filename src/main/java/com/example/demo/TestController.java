@@ -29,23 +29,14 @@ public class TestController {
             @RequestParam(value = "auc_end_date", required = false) String auc_end_date,
             @RequestParam(value = "proposal_label", required = false) String proposal_label,
             @RequestParam(value = "auction_type", required = false) String auction_type,
-            @RequestParam(value = "page", defaultValue = "1") int page, 
-            @RequestParam(value = "limit", defaultValue = "15") int pageSize) {
+            @RequestParam(value = "limit", defaultValue = "15") int pageSize,
+            @RequestParam(value = "sortBy", defaultValue = "attachment_id") String sortBy) {
     
         int startIndex = (page - 1) * pageSize;
         int endIndex = startIndex + pageSize;
         
-        ArrayList<Map<String, Object>> documents = AttachmentFileService.queryForDocumentsOptional(attachment_id, file_name, project_name, customer_name, commitment_period_id, resource_name, auc_begin_date, auc_end_date, proposal_label, auction_type);
-        
-        if (startIndex >= documents.size()) {
-            return new ArrayList<>();
-        }
-        
-        if (endIndex > documents.size()) {
-            endIndex = documents.size();
-        }
-        
-        return new ArrayList<>(documents.subList(startIndex, endIndex));
+        ArrayList<Map<String, Object>> documents = AttachmentFileService.queryForDocumentsOptional(attachment_id, file_name, project_name, customer_name, commitment_period_id, resource_name, auc_begin_date, auc_end_date, proposal_label, auction_type, page, pageSize, sortBy);
+        return documents;
     }
 
 }
