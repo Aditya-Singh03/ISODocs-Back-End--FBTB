@@ -30,7 +30,7 @@ public class TestController {
             @RequestParam(value = "proposal_label", required = false) String proposal_label,
             @RequestParam(value = "auction_type", required = false) String auction_type,
             @RequestParam(value = "limit", defaultValue = "15") int pageSize,
-            @RequestParam(value = "sortBy", defaultValue = "attachment_id") String sortBy, 
+            @RequestParam(value = "sortBy", defaultValue = "") String sortBy,
             @RequestParam(value = "page", defaultValue = "1") int page) {
         
         ArrayList<Map<String, Object>> documents = AttachmentFileService.queryForDocumentsOptional(attachment_id, file_name, project_name, customer_name, commitment_period_id, resource_name, auc_begin_date, auc_end_date, proposal_label, auction_type, page, pageSize, sortBy);

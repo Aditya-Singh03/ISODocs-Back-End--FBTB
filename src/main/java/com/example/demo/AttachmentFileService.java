@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import jakarta.persistence.TemporalType;
 
 @Service
@@ -50,6 +51,9 @@ public class AttachmentFileService {
         file_name = file_name == null ? null : "%"+file_name+"%";
         customer_name = customer_name == null ? null : "%"+customer_name+"%";
         project_name = project_name == null ? null : "%"+project_name+"%";
+        resource_name = resource_name == null ? null : "%"+resource_name+"%";
+        proposal_label = proposal_label == null ? null : "%"+proposal_label+"%";
+        auction_type = auction_type == null ? null : "%"+auction_type+"%";
         SimpleDateFormat formatter = new SimpleDateFormat("mm-dd-yyyy");
         java.sql.Date aucBeginDate = null;
         java.sql.Date aucEndDate = null;
@@ -88,10 +92,10 @@ public class AttachmentFileService {
         "AND (:project_name IS NULL OR LOWER(proj.name) LIKE :project_name) " +
         "AND (:customer_name IS NULL OR LOWER(cust.name) LIKE :customer_name) " +
         "AND (:commitment_period_id IS NULL OR auc.comPeriodId = :commitment_period_id) " +
-        "AND (:resource_name IS NULL OR LOWER(res.name) = :resource_name) " +
+        "AND (:resource_name IS NULL OR LOWER(res.name) LIKE :resource_name) " +
         "AND (CAST(:auc_begin_date AS DATE) IS NULL OR (auc.aucBeginDate >= :auc_begin_date AND auc.aucEndDate >= :auc_begin_date)) " +
         "AND (CAST(:auc_end_date AS DATE) IS NULL OR (auc.aucBeginDate <= :auc_end_date AND auc.aucEndDate <= :auc_end_date)) " +
-        "AND (:proposal_label IS NULL OR LOWER(prop.proposalLabel) = :proposal_label) " +
+        "AND (:proposal_label IS NULL OR LOWER(prop.proposalLabel) LIKE :proposal_label) " +
         "AND (:auction_type IS NULL OR auc.type = :auction_type) ";
 
         if (sortBy.equals("attachment_id")) {
@@ -115,18 +119,18 @@ public class AttachmentFileService {
         } else if (sortBy.equals("auction_type")) {
             query += "ORDER BY auc.type ASC";
         } else {
-            query += "ORDER BY a.attachmentId ASC";
+            query += "ORDER BY a.attachmentId DESC";
         }
 
         // query += "ORDER BY a.attachmentId ASC";
 
         List<Object> var = em.createQuery(query)
         .setParameter("attachment_id", attachment_id)
-        .setParameter("file_name", file_name)
-        .setParameter("project_name", project_name)
-        .setParameter("customer_name", customer_name)
+        .setParameter("file_name", file_name == null ? null : file_name.toLowerCase())
+        .setParameter("project_name", project_name == null ? null : project_name.toLowerCase())
+        .setParameter("customer_name", customer_name == null ? null : customer_name.toLowerCase())
         .setParameter("commitment_period_id", commitment_period_id)
-        .setParameter("resource_name", resource_name)
+        .setParameter("resource_name", resource_name == null ? null : resource_name.toLowerCase())
         .setParameter("auc_begin_date", aucBeginDate, TemporalType.DATE)
         .setParameter("auc_end_date", aucEndDate, TemporalType.DATE)
         .setParameter("proposal_label", proposal_label)
@@ -134,6 +138,44 @@ public class AttachmentFileService {
         .setFirstResult((page - 1) * pageSize)
         .setMaxResults(pageSize)
         .getResultList();
+
+
+        String queryCount = "SELECT COUNT(*) " +
+        "FROM AttachPropPrimaryKey a " +
+        "JOIN Attachment file ON a.attachmentId = file.id " +
+        "JOIN ProposalInfo prop ON a.proposalId = prop.id " +
+        "JOIN AuctionInfo auc ON prop.auctionId = auc.id " +
+        "JOIN ProjectInfo proj ON prop.projectId = proj.id " +
+        "JOIN ResourceInfo res ON prop.resourceId = res.id " +
+        "JOIN Customer cust ON prop.customerId = cust.id " +
+        "JOIN period_info period_info ON auc.comPeriodId = period_info.id " +
+        "WHERE (:attachment_id IS NULL OR a.attachmentId = :attachment_id) AND " +
+        "(:file_name IS NULL OR LOWER(file.name) LIKE :file_name) " +
+        "AND (:project_name IS NULL OR LOWER(proj.name) LIKE :project_name) " +
+        "AND (:customer_name IS NULL OR LOWER(cust.name) LIKE :customer_name) " +
+        "AND (:commitment_period_id IS NULL OR auc.comPeriodId = :commitment_period_id) " +
+        "AND (:resource_name IS NULL OR LOWER(res.name) LIKE :resource_name) " +
+        "AND (CAST(:auc_begin_date AS DATE) IS NULL OR (auc.aucBeginDate >= :auc_begin_date AND auc.aucEndDate >= :auc_begin_date)) " +
+        "AND (CAST(:auc_end_date AS DATE) IS NULL OR (auc.aucBeginDate <= :auc_end_date AND auc.aucEndDate <= :auc_end_date)) " +
+        "AND (:proposal_label IS NULL OR LOWER(prop.proposalLabel) LIKE :proposal_label) " +
+        "AND (:auction_type IS NULL OR auc.type = :auction_type) ";
+
+        Query count = em.createQuery(queryCount)
+            .setParameter("attachment_id", attachment_id)
+            .setParameter("file_name", file_name == null ? null : file_name.toLowerCase())
+            .setParameter("project_name", project_name == null ? null : project_name.toLowerCase())
+            .setParameter("customer_name", customer_name == null ? null : customer_name.toLowerCase())
+            .setParameter("commitment_period_id", commitment_period_id)
+            .setParameter("resource_name", resource_name == null ? null : resource_name.toLowerCase())
+            .setParameter("auc_begin_date", aucBeginDate, TemporalType.DATE)
+            .setParameter("auc_end_date", aucEndDate, TemporalType.DATE)
+            .setParameter("proposal_label", proposal_label)
+            .setParameter("auction_type", auction_type);
+
+        Long total = (Long) count.getSingleResult();
+
+
+
         
         ArrayList<Map<String, Object>> jsonResults = new ArrayList<>();
 
@@ -166,6 +208,7 @@ public class AttachmentFileService {
                 jsonResult.put("periodType","" + columns[22].toString());
                 jsonResult.put("aucBeginDate","" + columns[23].toString());
                 jsonResult.put("aucEndDate","" + columns[24].toString());
+                jsonResult.put("itemCount", total);
 
                 
                 jsonResults.add(jsonResult);
