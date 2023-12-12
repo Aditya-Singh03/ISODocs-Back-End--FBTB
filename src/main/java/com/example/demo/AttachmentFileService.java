@@ -50,6 +50,9 @@ public class AttachmentFileService {
         file_name = file_name == null ? null : "%"+file_name+"%";
         customer_name = customer_name == null ? null : "%"+customer_name+"%";
         project_name = project_name == null ? null : "%"+project_name+"%";
+        resource_name = resource_name == null ? null : "%"+resource_name+"%";
+        proposal_label = proposal_label == null ? null : "%"+proposal_label+"%";
+        auction_type = auction_type == null ? null : "%"+auction_type+"%";
         SimpleDateFormat formatter = new SimpleDateFormat("mm-dd-yyyy");
         java.sql.Date aucBeginDate = null;
         java.sql.Date aucEndDate = null;
