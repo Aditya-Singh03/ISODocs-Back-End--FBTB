@@ -119,7 +119,7 @@ public class AttachmentFileService {
         } else if (sortBy.equals("auction_type")) {
             query += "ORDER BY auc.type ASC";
         } else {
-            query += "ORDER BY a.attachmentId ASC";
+            query += "ORDER BY a.attachmentId DESC";
         }
 
         // query += "ORDER BY a.attachmentId ASC";
