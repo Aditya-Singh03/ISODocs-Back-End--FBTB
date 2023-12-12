@@ -52,6 +52,7 @@ public class AttachmentFileService {
         customer_name = customer_name == null ? null : "%"+customer_name+"%";
         project_name = project_name == null ? null : "%"+project_name+"%";
         resource_name = resource_name == null ? null : "%"+resource_name+"%";
+        proposal_label = proposal_label == null ? null : proposal_label.replace("%20", " ");
         proposal_label = proposal_label == null ? null : "%"+proposal_label+"%";
         auction_type = auction_type == null ? null : "%"+auction_type+"%";
         SimpleDateFormat formatter = new SimpleDateFormat("mm-dd-yyyy");
@@ -95,7 +96,7 @@ public class AttachmentFileService {
         "AND (:resource_name IS NULL OR LOWER(res.name) LIKE :resource_name) " +
         "AND (CAST(:auc_begin_date AS DATE) IS NULL OR (auc.aucBeginDate >= :auc_begin_date AND auc.aucEndDate >= :auc_begin_date)) " +
         "AND (CAST(:auc_end_date AS DATE) IS NULL OR (auc.aucBeginDate <= :auc_end_date AND auc.aucEndDate <= :auc_end_date)) " +
-        "AND (:proposal_label IS NULL OR LOWER(prop.proposalLabel) LIKE :proposal_label) " +
+        "AND (:proposal_label IS NULL OR prop.proposalLabel LIKE :proposal_label) " +
         "AND (:auction_type IS NULL OR auc.type LIKE :auction_type) ";
 
         if (sortBy.equals("attachment_id")) {
@@ -157,7 +158,7 @@ public class AttachmentFileService {
         "AND (:resource_name IS NULL OR LOWER(res.name) LIKE :resource_name) " +
         "AND (CAST(:auc_begin_date AS DATE) IS NULL OR (auc.aucBeginDate >= :auc_begin_date AND auc.aucEndDate >= :auc_begin_date)) " +
         "AND (CAST(:auc_end_date AS DATE) IS NULL OR (auc.aucBeginDate <= :auc_end_date AND auc.aucEndDate <= :auc_end_date)) " +
-        "AND (:proposal_label IS NULL OR LOWER(prop.proposalLabel) LIKE :proposal_label) " +
+        "AND (:proposal_label IS NULL OR prop.proposalLabel LIKE :proposal_label) " +
         "AND (:auction_type IS NULL OR auc.type LIKE :auction_type) ";
 
         Query count = em.createQuery(queryCount)
