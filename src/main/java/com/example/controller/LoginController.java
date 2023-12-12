@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Model.User;
 import com.example.Model.loginRequest;
 import com.example.Model.loginReturn;
+import com.example.demo.UserRepository;
 
 @RestController
 @CrossOrigin

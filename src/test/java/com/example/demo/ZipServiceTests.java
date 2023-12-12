@@ -1,8 +1,9 @@
 package com.example.demo;
 
 
-import com.example.demo.ZipService;
 import com.example.Model.zipReturn;
+import com.example.repository.ZipRepository;
+import com.example.service.ZipService;
 
 import org.checkerframework.checker.units.qual.t;
 import org.junit.jupiter.api.Test;

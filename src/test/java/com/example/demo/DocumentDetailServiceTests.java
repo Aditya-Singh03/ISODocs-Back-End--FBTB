@@ -3,8 +3,7 @@ package com.example.demo;
 
 import com.example.Model.documentDetailReturn;
 import com.example.Model.metaReturn;
-import com.example.demo.DocumentDetailService;
-
+import com.example.service.DocumentDetailService;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

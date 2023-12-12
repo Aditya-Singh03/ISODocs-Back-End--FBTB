@@ -1,3 +1,4 @@
+package com.example.demo.DocumentEntities;
 // package com.example.demo.DocumentEntities;
 
 // import jakarta.persistence.Column;

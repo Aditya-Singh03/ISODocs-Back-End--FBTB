@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.example.Model.zipReturn;
+import com.example.service.ZipService;
 
 @RestController
 @CrossOrigin

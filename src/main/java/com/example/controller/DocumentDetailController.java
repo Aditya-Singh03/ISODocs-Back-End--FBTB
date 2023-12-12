@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.controller;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Model.documentDetailReturn;
 import com.example.Model.metaReturn;
 import com.example.demo.AttachmentFileService;
+import com.example.service.DocumentDetailService;
 
 @RestController
 @CrossOrigin

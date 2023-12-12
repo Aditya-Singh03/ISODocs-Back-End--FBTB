@@ -4,7 +4,8 @@ package com.example.demo;
 import com.example.Model.User;
 import com.example.Model.loginRequest;
 import com.example.Model.loginReturn;
-
+import com.example.controller.LoginController;
+import com.example.demo.UserRepository;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

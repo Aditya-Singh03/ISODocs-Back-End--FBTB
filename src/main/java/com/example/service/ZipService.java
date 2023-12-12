@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.service;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.example.Model.attachmentFile;
+import com.example.repository.ZipRepository;
 
 @Component
 public class ZipService {
