@@ -96,7 +96,7 @@ public class AttachmentFileService {
         "AND (CAST(:auc_begin_date AS DATE) IS NULL OR (auc.aucBeginDate >= :auc_begin_date AND auc.aucEndDate >= :auc_begin_date)) " +
         "AND (CAST(:auc_end_date AS DATE) IS NULL OR (auc.aucBeginDate <= :auc_end_date AND auc.aucEndDate <= :auc_end_date)) " +
         "AND (:proposal_label IS NULL OR LOWER(prop.proposalLabel) LIKE :proposal_label) " +
-        "AND (:auction_type IS NULL OR auc.type = :auction_type) ";
+        "AND (:auction_type IS NULL OR auc.type LIKE :auction_type) ";
 
         if (sortBy.equals("attachment_id")) {
             query += "ORDER BY a.attachmentId ASC";
@@ -158,7 +158,7 @@ public class AttachmentFileService {
         "AND (CAST(:auc_begin_date AS DATE) IS NULL OR (auc.aucBeginDate >= :auc_begin_date AND auc.aucEndDate >= :auc_begin_date)) " +
         "AND (CAST(:auc_end_date AS DATE) IS NULL OR (auc.aucBeginDate <= :auc_end_date AND auc.aucEndDate <= :auc_end_date)) " +
         "AND (:proposal_label IS NULL OR LOWER(prop.proposalLabel) LIKE :proposal_label) " +
-        "AND (:auction_type IS NULL OR auc.type = :auction_type) ";
+        "AND (:auction_type IS NULL OR auc.type LIKE :auction_type) ";
 
         Query count = em.createQuery(queryCount)
             .setParameter("attachment_id", attachment_id)
